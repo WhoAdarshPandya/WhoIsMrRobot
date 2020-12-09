@@ -17,15 +17,15 @@ const initGame = () => {
 let highScores = [
   {
     name:'Tara',
-    score:4
+    score:9
   },
   {
     name :'Ramesh',
-    score:3
+    score:7
   },
   {
     name: 'Suresh',
-    score:5
+    score:6
   }
 ]
 
@@ -46,7 +46,7 @@ const play = (name) => {
     console.log("-----------------------------------------------");
     if(askedQuestion.type === "options")
     {
-      let currentAnswer = readlineSync.keyInSelect(askedQuestion.options,chalk.green(askedQuestion.title));
+      let currentAnswer = readlineSync.keyInSelect(askedQuestion.options,chalk.green(askedQuestion.title),{cancel:false});
       if(askedQuestion.options[currentAnswer].toLowerCase() === askedQuestion.answer.toLowerCase())
       {
        currentScore += 1;
@@ -79,6 +79,11 @@ const play = (name) => {
       {
         console.log(chalk.redBright(JSON.stringify(item)));
       }
+    }
+    console.log(chalk.greenBright("---- Correct Answers ----"))
+    for(let i = 0; i < length ; i++)
+    {
+      console.log(chalk.cyanBright(`[${i+1}] ${getAQuestion(name,i).askedQuestion.answer} ✔️`))
     }
 }
 
